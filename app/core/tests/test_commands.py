@@ -18,8 +18,7 @@ class CommandTest(SimpleTestCase):
         patched_check.assert_called_once_with(databases=['default'])
 
     @patch('time.sleep', return_value=None)
-    @patch('django.core.management.base.BaseCommand.check')
-    def test_wait_for_db_delay(self, patched_check, patched_sleep):
+    def test_wait_for_db_delay(self, patched_sleep,patched_check):
         """Test waiting for db when getting OperationalError"""
         # Side effects: raise errors, then succeed
         side_effects = [
