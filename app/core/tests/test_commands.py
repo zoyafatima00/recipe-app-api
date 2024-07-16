@@ -25,8 +25,10 @@ class CommandTest(SimpleTestCase):
         """Test waiting for db when getting OperationalError"""
         # Side effects: raise errors, then succeed
         side_effects = [
-            psycopg2OperationalError] * 2 + [
-            OperationalError] * 3 + [
+            psycopg2OperationalError() for _ in range(2)
+        ] + [
+            OperationalError() for _ in range(3)
+        ] + [
             True
         ]
         patched_check.side_effect = side_effects
